@@ -39,5 +39,10 @@ async def image(filename: str = Path(...)):
     return FileResponse(f"media/{filename}")
 
 
+@app.get("/video/{filename}")
+async def video(filename: str = Path(..., regex=r"\w+.\w")):
+    return FileResponse(f"media/{filename}")
+
+
 if __name__ == "__main__":
     uvicorn.run("app.main:app", host="0.0.0.0", port=8000, reload=True)
